@@ -1,0 +1,14 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+Student_registration_Client/dist
+Student_registration_Client/tmp
+Student_registration_Client/out-tsc
+Student_registration_Client/bazel-out
+
+# Node
+Student_registration_Client/node_modules
+npm-debug.log
+yarn-error.log
+
+Student_registration_Client/.vscode

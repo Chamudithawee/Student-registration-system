@@ -18,4 +18,5 @@ export class AuthAPIService {
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
+  
 }

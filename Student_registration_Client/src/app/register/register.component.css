@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+  }
+  
+  .container {
+    max-width: 100%;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    margin-bottom: 20px;
+  }
+  
+  .btn-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
