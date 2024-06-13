@@ -11,6 +11,12 @@ Student_registration_Client/node_modules
 npm-debug.log
 yarn-error.log
 
+Student_registration_Client/.angular/cache
+
 Student_registration_Client/.vscode
 
 Student_Registration_System_Server/.vs
+Student_Registration_System_Server/.vs/ProjectEvaluation/student_registration_system_server.metadata.v8.bin
+Student_Registration_System_Server/.vs/ProjectEvaluation/student_registration_system_server.projects.v8.bin
+Student_Registration_System_Server/.vs/ProjectEvaluation/student_registration_system_server.strings.v8.bin
+/Student_Registration_System_Server/.vs
