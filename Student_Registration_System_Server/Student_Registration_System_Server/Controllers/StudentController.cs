@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Student_Registration_System_Server.Data;
 using Student_Registration_System_Server.Models;
 
@@ -12,17 +13,26 @@ namespace Student_Registration_System_Server.Controllers
     {
 
         private readonly StudentDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public StudentController(StudentDbContext context)
+        public StudentController(StudentDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _hostEnvironment = webHostEnvironment;
         }
 
         // GET: api/students
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StudentsModel>>> GetStudents()
         {
-            return await _context.Students.ToListAsync();
+            var students = await _context.Students.ToListAsync();
+
+            foreach (var student in students)
+            {
+                student.ImagePath = GetServerBaseUrl() + student.ImagePath;
+            }
+
+            return students;
         }
 
         // GET: api/students/5
@@ -42,11 +52,39 @@ namespace Student_Registration_System_Server.Controllers
 
         // POST: api/students
         [HttpPost]
-        public async Task<ActionResult<StudentsModel>> PostStudent(StudentsModel student)
+        public async Task<ActionResult<StudentsModel>> PostStudent([FromForm] PostStudentDTO student, [FromForm] IFormFile imageFile)
         {
             try
             {
-                _context.Students.Add(student);
+                StudentsModel studentsModel = new StudentsModel();
+                studentsModel.FirstName = student.FirstName;
+                studentsModel.LastName = student.LastName;
+                studentsModel.Mobile = student.Mobile;
+                studentsModel.Email = student.Email;
+                studentsModel.NIC = student.NIC;
+                studentsModel.DateOfBirth = student.DateOfBirth;
+                studentsModel.Address = student.Address;
+
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    var uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "uploads");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(imageFile.FileName);
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(fileStream);
+                    }
+
+                    studentsModel.ImagePath = "/uploads/" + uniqueFileName;
+                }  
+                
+                _context.Students.Add(studentsModel);
                 await _context.SaveChangesAsync();
             }
             catch(Exception ex)
@@ -114,6 +152,14 @@ namespace Student_Registration_System_Server.Controllers
         private bool StudentExists(int id)
         {
             return _context.Students.Any(e => e.Id == id);
+        }
+
+        private string GetServerBaseUrl()
+        {
+            var request = HttpContext.Request;
+            var baseUrl = $"{request.Scheme}://{request.Host}";
+
+            return baseUrl;
         }
 
     }

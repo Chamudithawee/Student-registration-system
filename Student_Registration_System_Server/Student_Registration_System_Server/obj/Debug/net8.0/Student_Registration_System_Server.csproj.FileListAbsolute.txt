@@ -142,3 +142,4 @@ E:\Repo\Student-registration-system\Student_Registration_System_Server\Student_R
 E:\Repo\Student-registration-system\Student_Registration_System_Server\Student_Registration_System_Server\obj\Debug\net8.0\Student_Registration_System_Server.pdb
 E:\Repo\Student-registration-system\Student_Registration_System_Server\Student_Registration_System_Server\obj\Debug\net8.0\Student_Registration_System_Server.genruntimeconfig.cache
 E:\Repo\Student-registration-system\Student_Registration_System_Server\Student_Registration_System_Server\obj\Debug\net8.0\ref\Student_Registration_System_Server.dll
+E:\Repo\Student-registration-system\Student_Registration_System_Server\Student_Registration_System_Server\bin\Debug\net8.0\Student_Registration_System_Server.staticwebassets.runtime.json
