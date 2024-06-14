@@ -17,6 +17,8 @@ builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>()
     .AddEntityFrameworkStores<StudentDbContext>();
 
+builder.Services.AddSingleton<IWebHostEnvironment>(builder.Environment);
+
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //.AddJwtBearer(options =>
 //{
@@ -54,6 +56,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.MapIdentityApi<AppUser>();
 

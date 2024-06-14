@@ -52,19 +52,19 @@ namespace Student_Registration_System_Server.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(new { message = "Login unsuccessful" });
             }
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-                return Ok("Login successful");
+                return Ok(new { message = "Login successful" });
             }
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return BadRequest(ModelState);
+                return BadRequest(new { message = "Login unsuccessful" });
             }
         }
 

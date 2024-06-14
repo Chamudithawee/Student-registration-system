@@ -1,0 +1,141 @@
+<div class="student-list">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col">
+        <button class="btn btn-primary" (click)="onAdd()">Add New Student</button>
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchTerm" (ngModelChange)="filterStudents()">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th (click)="sort('firstName')" class="sortable">
+                First Name
+                <span *ngIf="sortKey === 'firstName'" class="sort-icon">
+                  <i class="fa" [ngClass]="{'fa-sort-alpha-down': sortDirection, 'fa-sort-alpha-up': !sortDirection}"></i>
+                </span>
+              </th>
+              <th (click)="sort('lastName')" class="sortable">
+                Last Name
+                <span *ngIf="sortKey === 'lastName'" class="sort-icon">
+                  <i class="fa" [ngClass]="{'fa-sort-alpha-down': sortDirection, 'fa-sort-alpha-up': !sortDirection}"></i>
+                </span>
+              </th>
+              <th (click)="sort('mobile')" class="sortable">
+                Mobile
+                <span *ngIf="sortKey === 'mobile'" class="sort-icon">
+                  <i class="fa" [ngClass]="{'fa-sort-numeric-down': sortDirection, 'fa-sort-numeric-up': !sortDirection}"></i>
+                </span>
+              </th>
+              <th (click)="sort('email')" class="sortable">
+                Email
+                <span *ngIf="sortKey === 'email'" class="sort-icon">
+                  <i class="fa" [ngClass]="{'fa-sort-alpha-down': sortDirection, 'fa-sort-alpha-up': !sortDirection}"></i>
+                </span>
+              </th>
+              <th (click)="sort('nic')" class="sortable">
+                NIC
+                <span *ngIf="sortKey === 'nic'" class="sort-icon">
+                  <i class="fa" [ngClass]="{'fa-sort-alpha-down': sortDirection, 'fa-sort-alpha-up': !sortDirection}"></i>
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of getPagedStudents()"
+                [class.table-active]="selectedStudent === student"
+                (click)="onSelect(student)">
+              <td>{{ student.firstName }}</td>
+              <td>{{ student.lastName }}</td>
+              <td>{{ student.mobile }}</td>
+              <td>{{ student.email }}</td>
+              <td>{{ student.nic }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
+      </div>
+      <div class="col">
+        <div *ngIf="selectedStudent" class="card">
+          <div class="card-header">
+            <h3>Student Details</h3>
+          </div>
+          <div class="card-body">
+            <p><strong>First Name:</strong> {{ selectedStudent.firstName }}</p>
+            <p><strong>Last Name:</strong> {{ selectedStudent.lastName }}</p>
+            <p><strong>Mobile:</strong> {{ selectedStudent.mobile }}</p>
+            <p><strong>Email:</strong> {{ selectedStudent.email }}</p>
+            <p><strong>NIC:</strong> {{ selectedStudent.nic }}</p>
+            <p><strong>Date of Birth:</strong> {{ selectedStudent.dateOfBirth | date }}</p>
+            <p><strong>Address:</strong> {{ selectedStudent.address }}</p>
+            <p *ngIf="selectedStudent.imagePath">
+              <strong>Image:</strong><br>
+              <img [src]="selectedStudent.imagePath" alt="Student Image" style="max-width: 200px; max-height: 200px;">
+            </p>
+            <button class="btn btn-secondary" (click)="onEdit()">Edit</button>
+            <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showModal" class="modal show d-block" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ isEdit ? 'Edit Student' : 'Add Student' }}</h5>
+            <button type="button" class="btn-close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" id="firstName" class="form-control" [(ngModel)]="editableStudent.firstName" name="firstName">
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" id="lastName" class="form-control" [(ngModel)]="editableStudent.lastName" name="lastName">
+              </div>
+              <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile</label>
+                <input type="text" id="mobile" class="form-control" [(ngModel)]="editableStudent.mobile" name="mobile">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" [(ngModel)]="editableStudent.email" name="email">
+              </div>
+              <div class="mb-3">
+                <label for="nic" class="form-label">NIC</label>
+                <input type="text" id="nic" class="form-control" [(ngModel)]="editableStudent.nic" name="nic">
+              </div>
+              <div class="mb-3">
+                <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                <input type="date" id="dateOfBirth" class="form-control" [(ngModel)]="editableStudent.dateOfBirth" name="dateOfBirth">
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" id="address" class="form-control" [(ngModel)]="editableStudent.address" name="address">
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" id="image" class="form-control" (change)="onFileSelected($event)">
+              </div>
+              <div *ngIf="imagePreview" class="mb-3">
+                <img [src]="imagePreview" alt="Image Preview" class="img-thumbnail" width="150">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+            <button type="button" class="btn btn-primary" (click)="onSave()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthAPIService {
 
-  private baseUrl = 'http://your-api-url/api';
+  private baseUrl = 'http://localhost:5105/api/Auth';
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +17,18 @@ export class AuthAPIService {
 
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials);
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem('token', token); // Store token in localStorage
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token'); // Retrieve token from localStorage
+  }
+
+  isLoggedIn(): boolean {
+    return this.getToken() !== null; // Check if token exists
   }
   
 }

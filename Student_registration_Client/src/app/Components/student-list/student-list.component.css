@@ -1,0 +1,32 @@
+/* Custom styles for better UI/UX */
+.table-row:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-dialog {
+  max-width: 600px;
+  margin: 1.75rem auto;
+}
+.table-active {
+  background-color: #390303;
+}
+.sort-icon {
+  margin-left: 5px;
+}
+
+.fa-sort-alpha-down:before {
+  content: "\f15d"; /* Unicode for down arrow */
+}
+
+.fa-sort-alpha-up:before {
+  content: "\f15e"; /* Unicode for up arrow */
+}

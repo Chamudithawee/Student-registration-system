@@ -1,11 +1,58 @@
 {
   "Version": 1,
-  "Hash": "D++piFa4WLLem5l6HcDQQKpHley0r42jIPOypzqm7xo=",
+  "Hash": "oDvrQy/gqaA3F6mE0a+0uOX0snUSa7aasX1AmB/obro=",
   "Source": "Student_Registration_System_Server",
   "BasePath": "_content/Student_Registration_System_Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Student_Registration_System_Server\\wwwroot",
+      "Source": "Student_Registration_System_Server",
+      "ContentRoot": "E:\\Repo\\Student-registration-system\\Student_Registration_System_Server\\Student_Registration_System_Server\\wwwroot\\",
+      "BasePath": "_content/Student_Registration_System_Server",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "E:\\Repo\\Student-registration-system\\Student_Registration_System_Server\\Student_Registration_System_Server\\wwwroot\\uploads\\69ce7c55-b419-4b2e-8f70-5a5730a1845e_AmongTreesScreenshot10.png",
+      "SourceId": "Student_Registration_System_Server",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Repo\\Student-registration-system\\Student_Registration_System_Server\\Student_Registration_System_Server\\wwwroot\\",
+      "BasePath": "_content/Student_Registration_System_Server",
+      "RelativePath": "uploads/69ce7c55-b419-4b2e-8f70-5a5730a1845e_AmongTreesScreenshot10.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\69ce7c55-b419-4b2e-8f70-5a5730a1845e_AmongTreesScreenshot10.png"
+    },
+    {
+      "Identity": "E:\\Repo\\Student-registration-system\\Student_Registration_System_Server\\Student_Registration_System_Server\\wwwroot\\uploads\\b2316932-9900-464c-a09a-c7345ade7b01_bcgvbfg.png",
+      "SourceId": "Student_Registration_System_Server",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Repo\\Student-registration-system\\Student_Registration_System_Server\\Student_Registration_System_Server\\wwwroot\\",
+      "BasePath": "_content/Student_Registration_System_Server",
+      "RelativePath": "uploads/b2316932-9900-464c-a09a-c7345ade7b01_bcgvbfg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\b2316932-9900-464c-a09a-c7345ade7b01_bcgvbfg.png"
+    }
+  ]
 }
